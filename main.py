@@ -35,6 +35,7 @@ while(True):
         logger.info("BUY!!!")
         logger.info("Balance: {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
+        logger.info("Coin price: {}".format(get_price(client, symbol)))
     elif flag!="SELL" and (not Strategy(client, symbol)):
         flag='SELL'
         quantity = 1
@@ -43,6 +44,7 @@ while(True):
         logger.info("SELL!!!")
         logger.info("Balance:  {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
+        logger.info("Coin price: {}".format(get_price(client, symbol)))
     else:
         logger.info("\n")
         logger.info("HOLD!!!")

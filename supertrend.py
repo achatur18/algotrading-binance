@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def Supertrend(df, atr_period=10, multiplier=3.0):
+def Supertrend(df, atr_period=10, multiplier=5.0):
     
     high = df['High'].apply(float)
     low = df['Low'].apply(float)
