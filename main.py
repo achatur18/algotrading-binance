@@ -18,7 +18,8 @@ symbol='BTCUSDT'
 logger.info("Start!!!")
 flag='SELL'
 while(True):
-    if flag!="BUY" and Strategy(client, symbol):
+    print(flag, Strategy(client, symbol, True))
+    if (flag=="SELL" and Strategy(client, symbol)):
         flag='BUY'
         # quantity_usdt = get_balance(client, "USDT")
         # quantity_usdt = 100000
@@ -36,7 +37,7 @@ while(True):
         logger.info("Balance: {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
         logger.info("Coin price: {}".format(get_price(client, symbol)))
-    elif flag!="SELL" and (not Strategy(client, symbol)):
+    elif (flag=="BUY" and (not Strategy(client, symbol))):
         flag='SELL'
         quantity = 1
         sell(client, symbol, quantity)
