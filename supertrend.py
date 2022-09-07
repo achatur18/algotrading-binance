@@ -25,7 +25,7 @@ def Supertrend(df, atr_period=10, multiplier=5.0):
     final_lowerband = lowerband = hl2 - (multiplier * atr)
     
     # initialize Supertrend column to True
-    supertrend = [True] * len(df)
+    supertrend = [False] * len(df)
     
     for i in range(1, len(df.index)):
         curr, prev = i, i-1

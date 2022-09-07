@@ -18,8 +18,9 @@ cols=["Kline open time",
 
 def Strategy(client, symbol='BTCUSDT', flag=False):
     candles = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE)
-    print(len(candles))
     df_1=pd.DataFrame(candles, columns=cols)
+    # print(df_1.shape)
+    # print(df_1['Close'][len(df_1)-1])
     flag_1=Supertrend(df_1)
     flag_1=flag_1['Supertrend'][len(flag_1)-1]
 
@@ -27,13 +28,18 @@ def Strategy(client, symbol='BTCUSDT', flag=False):
     candles = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_5MINUTE)
     df_5=pd.DataFrame(candles, columns=cols)
     # print(df_5.shape)
+    # print(df_5.shape)
     # print(df_5[["High", "Low", "Close"]].head())
     flag_5=Supertrend(df_5)
     flag_5=flag_5['Supertrend'][len(flag_5)-1]
 
     candles = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE)
+    # print(len(candles))
     df_15=pd.DataFrame(candles, columns=cols)
+    # print(df_15.shape)
+    # df_15.to_csv("data.csv")
     flag_15=Supertrend(df_15)
+    # print(df_15.shape, flag_15.shape)
     flag_15=flag_15['Supertrend'][len(flag_15)-1]
 
     if flag:
