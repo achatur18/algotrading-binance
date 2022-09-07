@@ -49,6 +49,7 @@ while(True):
     else:
         logger.info("\n")
         logger.info("HOLD!!!")
+        logger.info("Balance:  {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance: {}".format(get_balance(client, symbol[:-4])))
         logger.info("Coin price: {}".format(get_price(client, symbol)))
     time.sleep(60)
