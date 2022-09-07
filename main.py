@@ -15,8 +15,13 @@ import sys
 import datetime as dt
 # sys.stdout = open('output_{}.txt'.format(dt.datetime.now()),'wt')
 symbol='BTCUSDT'
-logger.info("Start!!!")
 flag='SELL'
+
+logger.info("Start!!!")
+logger.info("Balance: {}".format(get_balance(client, "USDT")))
+logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
+logger.info("Coin price: {}".format(get_price(client, symbol)))
+
 while(True):
     print(flag, Strategy(client, symbol, True))
     if (flag=="SELL" and Strategy(client, symbol)):

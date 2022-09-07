@@ -6,7 +6,7 @@ order=client.create_order(
     symbol='BTCUSDT',
     side=SIDE_SELL,
     type=ORDER_TYPE_MARKET,
-    quantity=0.0004
+    quantity=1
 )
 # print(order)
 
