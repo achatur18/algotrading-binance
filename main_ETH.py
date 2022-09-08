@@ -1,12 +1,12 @@
 from loguru import logger
 
 logger.configure(extra={"table_id": "AT7UP01"})
-logger.add("./publish_log_eth.log",format="{extra[table_id]} - [{time}] - {message}", rotation="12:00", compression="gz")
+logger.add("./publish_log.log",format="{extra[table_id]} - [{time}] - {message}", rotation="12:00", compression="gz")
 
 
-from binance import Client, ThreadedWebsocketManager, ThreadedDepthCacheManager
+from binance import Client
 import config
-from strategy import Strategy
+from strategy import Strategy_5_15
 from buy_sell import buy, sell
 from utils import get_balance, get_price
 import time
@@ -15,21 +15,22 @@ import sys
 import datetime as dt
 # sys.stdout = open('output_{}.txt'.format(dt.datetime.now()),'wt')
 symbol='ETHUSDT'
-logger.info("Start!!!")
 flag='SELL'
+
+logger.info("Start!!!")
+logger.info("Balance: {}".format(get_balance(client, "USDT")))
+logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
+logger.info("Coin price: {}".format(get_price(client, symbol)))
+
 while(True):
-    print(flag, Strategy(client, symbol, True))
-    if (flag=="SELL" and Strategy(client, symbol)):
+    flags = Strategy_5_15(client, symbol, True)
+    StrategyFlag = flags[0]
+    for signal in flags:
+        StrategyFlag=StrategyFlag and signal
+        
+    print(flag, flags)
+    if (flag=="SELL" and StrategyFlag):
         flag='BUY'
-        # quantity_usdt = get_balance(client, "USDT")
-        # quantity_usdt = 100000
-        # price_symbol = get_price(client, symbol)+10
-        # info = client.get_symbol_info(symbol)
-        # maxQty=float(info['filters'][2]['maxQty'])
-        # minQty=float(info['filters'][2]['minQty'])
-        # quantity =float(round(float(quantity_usdt/price_symbol), 8))
-        # quantity=min(quantity, maxQty)
-        # quantity=max(quantity, minQty)
         quantity=1
         buy(client, symbol, quantity)
         logger.info("\n")
@@ -37,7 +38,7 @@ while(True):
         logger.info("Balance: {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
         logger.info("Coin price: {}".format(get_price(client, symbol)))
-    elif (flag=="BUY" and (not Strategy(client, symbol))):
+    elif (flag=="BUY" and (not StrategyFlag)):
         flag='SELL'
         quantity = 1
         sell(client, symbol, quantity)
@@ -52,7 +53,10 @@ while(True):
         logger.info("Balance:  {}".format(get_balance(client, "USDT")))
         logger.info("Coin balance: {}".format(get_balance(client, symbol[:-4])))
         logger.info("Coin price: {}".format(get_price(client, symbol)))
-    time.sleep(60)
+    time.sleep(1)
+    while(True):
+        if time.time()%60<=1:
+            break
 
                 
         
