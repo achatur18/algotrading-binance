@@ -28,7 +28,7 @@ while(True):
     for signal in flags:
         StrategyFlag=StrategyFlag and signal
         
-    logger.info(flag, flags)
+    logger.info("{} - {}".format(flag, flags))
     if (flag=="SELL" and StrategyFlag):
         flag='BUY'
         quantity=1
