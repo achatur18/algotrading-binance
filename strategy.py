@@ -32,7 +32,7 @@ def Strategy_1_5_15(client, symbol='BTCUSDT', flag=False):
 
     candles = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_15MINUTE)
     df_15=pd.DataFrame(candles, columns=cols)
-    flag_15=filter_df(flag_15, 500)
+    df_15=filter_df(df_15, 500)
     flag_15=Supertrend(df_15, ewm=False)
     flag_15=flag_15['Supertrend'][len(flag_15)-2]
 
