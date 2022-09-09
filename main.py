@@ -55,7 +55,7 @@ while(True):
         logger.info("Coin price: {}".format(get_price(client, symbol)))
     time.sleep(1)
     while(True):
-        if time.time()%60<=1:
+        if time.time()%60<=2 and time.time()%60>1:
             break
 
                 
