@@ -8,7 +8,7 @@ from binance import Client
 import config
 from strategy import Strategy_1_5_15
 from buy_sell import buy, sell
-from utils import get_balance, get_price
+from utils import get_balance, get_price, available_quantity
 import time
 client = Client(config.APIKey, config.SecretKey, testnet =True)
 import sys
@@ -40,7 +40,8 @@ while(True):
         logger.info("Coin price: {}".format(get_price(client, symbol)))
     elif (flag=="BUY" and (not StrategyFlag)):
         flag='SELL'
-        quantity = 1
+        quantity = available_quantity(client, symbol[:-4])
+        print(quantity)
         sell(client, symbol, quantity)
         logger.info("\n")
         logger.info("SELL!!!")

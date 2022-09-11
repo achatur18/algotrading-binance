@@ -23,3 +23,9 @@ def filter_df(df, true_range_threshold=200):
     df=df[true_range<true_range_threshold]
     df.index=range(0, len(df))
     return df
+
+def available_quantity(client, symbol):
+    bal = str(get_balance(client, symbol))
+    bals=bal.split(".")
+    bal=float(bals[0]+"."+bals[1][:2])
+    return bal
