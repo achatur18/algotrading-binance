@@ -34,10 +34,10 @@ while(True):
     for signal in prev_flags:
         prev_StrategyFlag=prev_StrategyFlag and signal
 
-    StrategyFlag=StrategyFlag and (not prev_StrategyFlag)
+    # StrategyFlag=StrategyFlag and (not prev_StrategyFlag)
         
     logger.info("{} - {}".format(flag, flags))
-    if (flag=="SELL" and StrategyFlag):
+    if (flag=="SELL" and (StrategyFlag and (not prev_StrategyFlag))):
         flag='BUY'
         quantity=1
         buy(client, symbol, quantity)
