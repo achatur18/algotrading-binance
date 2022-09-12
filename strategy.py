@@ -16,7 +16,7 @@ cols=["Kline open time",
 "Taker buy quote asset volume",
 "Unused field"]
 
-def Strategy_1_5_15(client, symbol='BTCUSDT', flag=False):
+def Strategy_1_5_15(client, symbol='BTCUSDT', flag=False, index=-2):
     candles = client.get_klines(symbol=symbol, interval=Client.KLINE_INTERVAL_1MINUTE)
     df_1=pd.DataFrame(candles, columns=cols)
     df_1=filter_df(df_1, 100)

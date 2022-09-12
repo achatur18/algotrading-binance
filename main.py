@@ -23,7 +23,9 @@ logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
 logger.info("Coin price: {}".format(get_price(client, symbol)))
 
 while(True):
-    flags = Strategy_1_5_15(client, symbol, True)
+    prev_flags = Strategy_1_5_15(client, symbol, True, index=-3)
+    flags = Strategy_1_5_15(client, symbol, True, index=-2)
+    flags=flags and (not prev_flags)
     StrategyFlag = flags[0]
     for signal in flags:
         StrategyFlag=StrategyFlag and signal
