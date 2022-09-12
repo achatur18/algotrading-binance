@@ -29,3 +29,11 @@ def available_quantity(client, symbol):
     bals=bal.split(".")
     bal=float(bals[0]+"."+bals[1][:2])
     return bal
+
+import datetime as dt
+import yfinance as yf
+def get_yf_data(ticker, interval, start = dt.datetime.now()-dt.timedelta(1), end = dt.datetime.now()):
+    ohlc_data = yf.download(tickers=ticker,start=start,end=end,interval=interval)
+    ohlc_data.columns=["open", "High", "Low", "Close", "adj close", "volume"]
+    return ohlc_data
+    
