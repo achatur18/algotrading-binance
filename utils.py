@@ -33,7 +33,7 @@ def available_quantity(client, symbol):
 import datetime as dt
 import yfinance as yf
 def get_yf_data(symbol, interval, start = dt.datetime.now()-dt.timedelta(1), end = dt.datetime.now()):
-    ohlc_data = yf.download(tickers=symbol,start=start,end=end,interval=interval)
+    ohlc_data = yf.download(tickers=symbol,start=start,interval=interval)
     ohlc_data.columns=["open", "High", "Low", "Close", "adj close", "volume"]
     return ohlc_data
     
