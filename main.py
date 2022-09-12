@@ -37,7 +37,7 @@ while(True):
     # StrategyFlag=StrategyFlag and (not prev_StrategyFlag)
         
     logger.info("{} - {}".format(flag, flags))
-    if (flag=="SELL" and (StrategyFlag and (not prev_StrategyFlag))):
+    if (flag=="SELL" and (StrategyFlag )):  # and (not prev_StrategyFlag)
         flag='BUY'
         quantity=1
         buy(client, symbol, quantity)
