@@ -28,13 +28,13 @@ while(True):
     for signal in flags:
         StrategyFlag=StrategyFlag and signal
 
-    prev_flags = Strategy_1_5_15_yf(flag=True, index=-2)
-    prev_StrategyFlag = prev_flags[0]
-    for signal in prev_flags:
-        prev_StrategyFlag=prev_StrategyFlag and signal
+    # prev_flags = Strategy_1_5_15_yf(flag=True, index=-2)
+    # prev_StrategyFlag = prev_flags[0]
+    # for signal in prev_flags:
+    #     prev_StrategyFlag=prev_StrategyFlag and signal
 
     # StrategyFlag=StrategyFlag and (not prev_StrategyFlag)
-        
+
     logger.info("{} - {}".format(flag, flags))
     if (flag=="SELL" and (StrategyFlag )):  # and (not prev_StrategyFlag)
         flag='BUY'
