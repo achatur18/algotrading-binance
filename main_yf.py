@@ -23,17 +23,10 @@ logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
 logger.info("Coin price: {}".format(get_price(client, symbol)))
 
 while(True):
-    flags = Strategy_1_5_yf(flag=[True,True,False], index=-1)
+    flags = Strategy_1_5_15_yf(flag=[True,True,True], index=-1)
     StrategyFlag = flags[0]
     for signal in flags:
         StrategyFlag=StrategyFlag and signal
-
-    # prev_flags = Strategy_1_5_15_yf(flag=True, index=-2)
-    # prev_StrategyFlag = prev_flags[0]
-    # for signal in prev_flags:
-    #     prev_StrategyFlag=prev_StrategyFlag and signal
-
-    # StrategyFlag=StrategyFlag and (not prev_StrategyFlag)
 
     logger.info("{} - {}".format(flag, flags))
     if (flag=="SELL" and (StrategyFlag )):  # and (not prev_StrategyFlag)
