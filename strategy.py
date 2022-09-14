@@ -16,7 +16,7 @@ cols=["Kline open time",
 "Taker buy quote asset volume",
 "Unused field"]
 
-def Strategy_1_5_15_yf( symbol='BTC-USD', flag=[True, True, False], index=-1):
+def Strategy_1_5_15_yf( symbol='BTC-USD', flag=[True, True, True], index=-1):
     df_1 = get_yf_data(symbol=symbol, interval='1m')
     flag_1=Supertrend(df_1, ewm=flag[0])
     flag_1.to_csv("flag_1.csv")
@@ -24,12 +24,16 @@ def Strategy_1_5_15_yf( symbol='BTC-USD', flag=[True, True, False], index=-1):
 
 
     df_5 = get_yf_data(symbol=symbol, interval='5m')
+    if (df_5.tail(1).index.time[0].minute%5!=0):
+        df_5=df_5[:-1]
     flag_5=Supertrend(df_5, ewm=flag[1])
     flag_5.to_csv("flag_5.csv")
     flag_5=flag_5['Supertrend'][len(flag_5)+index]
 
 
     df_15 = get_yf_data(symbol=symbol, interval='15m')
+    if (df_15.tail(1).index.time[0].minute%15!=0):
+        df_15=df_15[:-1]
     flag_15=Supertrend(df_15, ewm=flag[2])
     flag_15.to_csv("flag_15.csv")
     flag_15=flag_15['Supertrend'][len(flag_15)+index]
