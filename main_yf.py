@@ -6,7 +6,7 @@ logger.add("./publish_log.log",format="{extra[table_id]} - [{time}] - {message}"
 
 from binance import Client
 import config
-from strategy import Strategy_1_5_15,Strategy_1_5_15_yf
+from strategy import Strategy_1_5_15,Strategy_1_5_15_yf, Strategy_1_5_yf
 from buy_sell import buy, sell
 from utils import get_balance, get_price, available_quantity
 import time
@@ -23,7 +23,7 @@ logger.info("Coin balance:  {}".format(get_balance(client, symbol[:-4])))
 logger.info("Coin price: {}".format(get_price(client, symbol)))
 
 while(True):
-    flags = Strategy_1_5_15_yf(flag=True, index=-1)
+    flags = Strategy_1_5_yf(flag=[True,True,False], index=-1)
     StrategyFlag = flags[0]
     for signal in flags:
         StrategyFlag=StrategyFlag and signal

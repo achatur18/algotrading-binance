@@ -20,7 +20,7 @@ def filter_df(df, true_range_threshold=200):
     true_range = pd.concat(price_diffs, axis=1)
     true_range = true_range.abs().max(axis=1)
     
-    df=df[true_range<true_range_threshold]
+    df=df[true_range<=true_range_threshold]
     df.index=range(0, len(df))
     return df
 

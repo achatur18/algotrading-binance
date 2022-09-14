@@ -16,8 +16,10 @@ def Supertrend(df, atr_period=10, multiplier=5.0, ewm=False, param=1):
     # default ATR calculation in supertrend indicator
     if ewm:
         atr = true_range.ewm(alpha=1/atr_period,min_periods=atr_period).mean() 
+    # elif :
+    #     atr = true_range.ewm(span=param,min_periods=atr_period).mean() 
     else:
-        atr = true_range.ewm(span=param,min_periods=atr_period).mean() 
+        atr = true_range.ewm(com=param,min_periods=atr_period).mean() 
     
     # HL2 is simply the average of high and low prices
     hl2 = (high + low) / 2
