@@ -29,7 +29,10 @@ while(True):
             flags = Strategy_1_5_15_yf(flag=[True,True,True], index=-1)
         except:
             pass
-        
+        print("Data fetching failed!!! ... Retrying again in 5 secs.")
+        time.sleep(5)
+
+
     StrategyFlag = flags[0]
     for signal in flags:
         StrategyFlag=StrategyFlag and signal
